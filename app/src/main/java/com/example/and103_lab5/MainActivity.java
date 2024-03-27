@@ -22,6 +22,7 @@ import com.example.and103_lab5.services.HttpRequest;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -142,22 +143,26 @@ public class MainActivity extends AppCompatActivity implements DistributorAdapte
     };
 
 
-    Callback<Response<Distributor>> responseDistributorAPI  = new Callback<Response<Distributor>>() {
+    Callback<Response<ArrayList<Distributor>>> responseDistributorAPI  = new Callback<Response<ArrayList<Distributor>>>() {
         @Override
-        public void onResponse(Call<Response<Distributor>> call, retrofit2.Response<Response<Distributor>> response) {
+        public void onResponse(Call<Response<ArrayList<Distributor>>> call, retrofit2.Response<Response<ArrayList<Distributor>>> response) {
             if (response.isSuccessful()) {
                 if (response.body().getStatus() == 200) {
-                   httpRequest.callAPI()
-                           .getListDistributor()
-                           .enqueue(getDistributorAPI);
-                    Toast.makeText(MainActivity.this, response.body().getMessenger(), Toast.LENGTH_SHORT).show();
+
+                    list = response.body().getData();
+                    getData();
+
+//                   httpRequest.callAPI()
+//                           .getListDistributor()
+//                           .enqueue(getDistributorAPI);
+//                    Toast.makeText(MainActivity.this, response.body().getMessenger(), Toast.LENGTH_SHORT).show();
                 }
             }
         }
 
         @Override
-        public void onFailure(Call<Response<Distributor>> call, Throwable t) {
-            Log.e(TAG, "onFailure: "+t.getMessage() );
+        public void onFailure(Call<Response<ArrayList<Distributor>>> call, Throwable t) {
+
         }
     };
 

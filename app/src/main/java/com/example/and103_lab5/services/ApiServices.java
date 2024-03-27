@@ -15,7 +15,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiServices {
-    public static String BASE_URL = "http://192.168.1.4:3000/api/";
+    public static String BASE_URL = "http://10.82.0.105:3000/api/";
 
     @GET("get-list-distributor")
         Call<Response<ArrayList<Distributor>>> getListDistributor();
@@ -24,18 +24,13 @@ public interface ApiServices {
         Call<Response<ArrayList<Distributor>>> searchDistributor(@Query("key") String key);
 
     @POST("add-distributor")
-    Call<Response<Distributor>> addDistributor(@Body Distributor distributor);
+    Call<Response<ArrayList<Distributor>>> addDistributor(@Body Distributor distributor);
 
     @PUT("update-distributor-by-id/{id}")
-    Call<Response<Distributor>> updateDistributor(@Path("id") String id,@Body Distributor distributor);
+    Call<Response<ArrayList<Distributor>>> updateDistributor(@Path("id") String id,@Body Distributor distributor);
 
     @DELETE("destroy-distributor-by-id/{id}")
-    Call<Response<Distributor>> deleteDistributor(@Path("id") String id);
-
-
-
-
-
+    Call<Response<ArrayList<Distributor>>> deleteDistributor(@Path("id") String id);
 
 }
 
